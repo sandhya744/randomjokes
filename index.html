@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* General page styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Container for the joke generator */
+        .container {
+            text-align: center;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        /* Header styling */
+        h1 {
+            margin: 0 0 10px;
+            color: #007bff;
+            font-size: 2rem;
+        }
+
+        /* Button styling */
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Joke text styling */
+        #joke {
+            margin-top: 20px;
+            font-size: 1.3em;
+            font-style: italic;
+            color: #555;
+        }
+
+        /* Footer styling */
+        footer {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+      <!-- Main container for the joke generator -->
+      <div class="container">
+        <h1>Programming Joke Generator</h1>
+        <button onclick="jokeapi()">Get a Joke</button>
+        <p id="joke">Click the button to see a joke!</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        Made with ❤️ for developers!
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        async function jokeapi(){
+            let data=await fetch("https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,explicit&type=single")
+            let result=await data.json()
+            console.log(result)
+             // Check if the joke was successfully fetched
+             if (result.joke) {
+                    // Display the joke in the 'joke' paragraph
+                    document.getElementById("joke").innerText = result.joke;
+                } else {
+                    document.getElementById("joke").innerText = "Sorry, no jokes available right now!";
+                }
+            
+        }
+    </script>
+</body>
+</html>
